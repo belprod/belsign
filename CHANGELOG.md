@@ -2,6 +2,14 @@
 
 Les changements notables de chaque version. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), numérotation [SemVer](https://semver.org/lang/fr/).
 
+## [1.0.2] — 2026-11-15
+
+### Corrigé
+
+- Quand le domaine pointe sur le dossier de l'application (et non sur `public/`), comme souvent chez IONOS :
+  - erreur 500 sur toutes les pages : la redirection vers `public/` précise désormais sa base (`RewriteBase /`) et ne peut plus boucler ;
+  - boucle de redirection vers l'installeur (« trop de redirections ») : l'installeur est maintenant reconnu quel que soit le chemin de redirection.
+
 ## [1.0.1] — 2026-11-15
 
 ### Corrigé

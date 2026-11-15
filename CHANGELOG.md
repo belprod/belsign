@@ -2,6 +2,12 @@
 
 Les changements notables de chaque version. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), numérotation [SemVer](https://semver.org/lang/fr/).
 
+## [1.0.1] — 2026-11-15
+
+### Corrigé
+
+- Erreur 500 sur toutes les pages chez les hébergeurs qui interdisent la directive `Options` dans les fichiers `.htaccess` (notamment IONOS). Les dossiers sans page d'index contiennent désormais un fichier `index.html` vide, pour qu'aucun dossier ne soit jamais listé.
+
 ## [1.0.0] — 2026-11-15
 
 Première version publique de Belsign, publiée sous licence MIT.

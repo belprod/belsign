@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Signaler une faille de sécurité
+    url: https://github.com/belprod/belsign/security/advisories/new
+    about: Signalement privé, ne créez pas de ticket public.
+  - name: Guide d'installation
+    url: https://github.com/belprod/belsign/blob/main/docs/installation.md
+    about: Installation, mise à jour, sauvegarde et dépannage.

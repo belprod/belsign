@@ -1,0 +1,44 @@
+name: Signaler un problème
+description: Quelque chose ne fonctionne pas comme prévu.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Merci de prendre le temps de signaler ce problème.
+        **Faille de sécurité ?** Ne créez pas de ticket public : voir [SECURITY.md](https://github.com/belprod/belsign/blob/main/SECURITY.md).
+        **Ne joignez aucune donnée personnelle** (nom, signature, PDF de document réel).
+  - type: input
+    id: version
+    attributes:
+      label: Version de Belsign
+      description: Indiquée en bas de la page Aide.
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: hosting
+    attributes:
+      label: Hébergement et version de PHP
+      placeholder: "OVH mutualisé, PHP 8.2"
+  - type: textarea
+    id: what
+    attributes:
+      label: Que se passe-t-il ?
+      description: Ce que vous avez fait, ce que vous attendiez, ce qui s'est produit.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Étapes pour reproduire
+      placeholder: |
+        1. Aller dans …
+        2. Cliquer sur …
+        3. …
+  - type: textarea
+    id: logs
+    attributes:
+      label: Journal d'erreurs
+      description: Dernières lignes de storage/logs/app.log, si disponibles (relisez-les pour retirer toute donnée personnelle).
+      render: text

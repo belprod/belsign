@@ -1,8 +1,6 @@
-<p align="center">
-  <img src="docs/images/logo.svg" width="64" height="64" alt="">
-</p>
-
-<h1 align="center">Belsign</h1>
+<h1 align="center">
+  <img src="docs/images/belsign.svg" width="260" alt="belsign.">
+</h1>
 
 <p align="center">
   <strong>Les autorisations de droit à l'image, signées sur tablette en deux minutes.</strong><br>

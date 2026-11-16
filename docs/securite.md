@@ -16,6 +16,16 @@ Belsign traite des données personnelles : identité, adresse, image, signature 
   - mode strict, identifiant renouvelé à la connexion ;
   - expiration après une heure d'inactivité (`SESSION_LIFETIME`) ;
   - fichiers de session rangés dans `storage/sessions/`, pas dans le dossier temporaire partagé de l'hébergement.
+- **Double authentification obligatoire pour les administrateurs** :
+  - code TOTP à 6 chiffres (RFC 6238), configuré par QR code à la première connexion ;
+  - un code déjà utilisé ne peut pas être rejoué ;
+  - 8 codes de secours à usage unique, stockés sous forme d'empreinte ;
+  - tant que le second facteur n'est pas fourni, aucune page n'est accessible.
+- **Invitations et réinitialisations** :
+  - liens à usage unique et durée limitée (7 jours pour une invitation, 1 heure pour une réinitialisation) ;
+  - seule l'empreinte SHA-256 du jeton est stockée ;
+  - un administrateur ne connaît jamais le mot de passe des autres comptes ;
+  - la demande de réinitialisation donne la même réponse que l'adresse existe ou non, et le nombre de demandes est limité.
 - **Fermeture des sessions** : désactiver un compte ou changer son mot de passe ferme immédiatement ses autres sessions.
 - **Rôles vérifiés côté serveur sur chaque page** :
   - un utilisateur n'accède qu'aux documents qu'il a créés ;
@@ -59,6 +69,14 @@ Belsign traite des données personnelles : identité, adresse, image, signature 
   - chaque dossier sensible (`config/`, `src/`, `storage/`, `vendor/`, `scripts/`) interdit en plus tout accès direct.
 - **Erreurs** : elles ne sont jamais affichées en production. Elles sont écrites dans `storage/logs/app.log`.
 - **Version** : ni la version de PHP ni celle de l'application ne sont exposées publiquement.
+
+### Mises à jour en un clic
+
+- Téléchargement uniquement depuis les versions du dépôt officiel, en HTTPS.
+- Empreinte SHA-256 de l'archive vérifiée, puis contenu contrôlé avant tout remplacement.
+- Sauvegarde complète faite automatiquement juste avant.
+- `config/.env` et `storage/` ne sont jamais modifiés.
+- Action réservée aux administrateurs, donc protégée par la double authentification.
 
 ### Installeur
 

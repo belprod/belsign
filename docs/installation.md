@@ -71,14 +71,24 @@ Ces réglages se modifient plus tard dans `config/.env`, à éditer par FTP.
 
 ## 4. Premiers pas
 
-1. **Personnalisation** : nom, logo, couleur d'accent.
-2. **Modèles** > *Nouveau modèle* : indiquez le client. Le texte standard est déjà prêt : adaptez-le, ajoutez le logo du client, puis enregistrez.
-3. **Utilisateurs** : créez les comptes des personnes qui feront signer.
-4. Programmez la **sauvegarde automatique** (voir ci-dessous).
+1. **Double authentification** : à la première connexion, scannez le QR code avec une application d'authentification (Google Authenticator, Microsoft Authenticator, 1Password…), puis conservez les codes de secours affichés. C'est obligatoire pour les administrateurs.
+2. **Réglages** > *Personnalisation* : nom, langue par défaut, logo, couleur d'accent.
+3. **Modèles** > *Nouveau modèle* : indiquez le client et la langue du document. Le texte standard est déjà prêt : adaptez-le, ajoutez le logo du client, puis enregistrez.
+4. **Utilisateurs** > *Inviter quelqu'un* : chaque personne reçoit un email pour créer son compte et choisir son mot de passe.
+5. Programmez la **sauvegarde automatique** (voir ci-dessous).
 
 L'aide intégrée, accessible depuis le menu **Aide**, détaille l'utilisation au quotidien.
 
 ## Mettre à jour l'application
+
+**En un clic (recommandé)** : **Réglages** > *Sauvegarde et mises à jour*. Quand une nouvelle version est disponible, *Mettre à jour maintenant* :
+- télécharge l'archive depuis GitHub et vérifie son empreinte ;
+- fait une sauvegarde complète ;
+- remplace les fichiers de l'application, sans toucher à `config/.env` ni à `storage/`.
+
+Il faut l'extension PHP `zip` et des droits d'écriture sur les dossiers de l'application. Sinon, la page indique ce qui manque : mettez alors à jour par FTP.
+
+**Par FTP** :
 
 1. Faites une **sauvegarde** (voir ci-dessous).
 2. Décompressez la nouvelle archive et envoyez son contenu par FTP en **écrasant** les fichiers existants. L'archive ne contient ni `config/.env` ni aucune donnée : vos réglages, documents et signatures ne sont pas touchés.
@@ -110,7 +120,7 @@ Chaque exécution crée une archive datée dans `storage/backups/` et conserve l
 
 **Téléchargez régulièrement `storage/backups/` sur un autre support**, au moins une fois par semaine : une sauvegarde restée sur le serveur ne protège pas d'une panne du serveur.
 
-**Sans tâche planifiée**, téléchargez le dossier `storage/` par FTP, de préférence quand personne n'utilise l'application.
+**Sans tâche planifiée** : **Réglages** > *Sauvegarde et mises à jour* > *Télécharger une sauvegarde* crée et télécharge une archive complète en un clic.
 
 ## Restaurer une sauvegarde
 
@@ -135,7 +145,8 @@ Supprimez `config/.env` et `storage/database.sqlite` par FTP, puis ouvrez l'appl
 | Toutes les pages redirigent vers `https://` | `APP_URL` est en `https://` mais le certificat SSL n'est pas actif : activez-le, ou mettez temporairement `http://` dans `config/.env`. |
 | « Installée à la racine du domaine » en rouge | L'application est dans un sous-dossier : créez un sous-domaine dédié. |
 | Le site affiche la liste des fichiers, ou une erreur 403 sur toutes les pages | Le fichier `.htaccess` n'a pas été envoyé : affichez les fichiers cachés dans le client FTP et renvoyez-le. |
-| Les emails n'arrivent pas | Configurez un serveur SMTP dans `config/.env`, et regardez le dossier spam. |
+| Les emails n'arrivent pas | Configurez un serveur SMTP dans `config/.env`, et regardez le dossier spam. Pour une invitation, le lien reste affiché à l'administrateur, qui peut le transmettre lui-même. |
+| Un administrateur a perdu son téléphone et ses codes de secours | Un autre administrateur réinitialise sa double authentification depuis sa fiche (*Utilisateurs* > *Modifier*). S'il est le seul administrateur : `php scripts/reset-2fa.php son@email.fr` (accès SSH ou tâche planifiée ponctuelle). |
 | Le logo ne s'enregistre pas | Image de 2 Mo maximum, au format PNG, JPEG ou WebP. |
 
 ### Vérifier que les données sont protégées

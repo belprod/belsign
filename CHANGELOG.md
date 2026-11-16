@@ -2,6 +2,37 @@
 
 Les changements notables de chaque version. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), numérotation [SemVer](https://semver.org/lang/fr/).
 
+## [1.1.0] — 2026-11-16
+
+### Nouveautés
+
+- **Bilingue français / anglais** : toute l'interface, installeur compris. Chacun choisit sa langue (sélecteur FR / EN, mémorisé sur le compte). La langue par défaut se règle dans l'installeur et dans les réglages. Les emails partent dans la langue du destinataire.
+- **Texte standard en anglais** : à la création d'un modèle, on choisit la langue du document.
+- **Double authentification obligatoire pour les administrateurs** :
+  - code à 6 chiffres d'une application (Google Authenticator, 1Password…), configurée par QR code à la première connexion ;
+  - codes de secours à usage unique ;
+  - réinitialisation possible par un autre administrateur ou par `scripts/reset-2fa.php`.
+- **Invitations par email** : l'administrateur invite un utilisateur ou un administrateur, qui crée lui-même son compte et son mot de passe. Le lien reste affiché à l'administrateur si l'email n'arrive pas.
+- **Mot de passe oublié** : lien de réinitialisation par email, valable 1 heure.
+- **Mon compte** : changer son mot de passe et sa langue, régénérer ses codes de secours.
+- **Pré-remplissage** : le client, le lieu, la date et le support du document précédent sont repris pendant la session de tournage, et la date du jour est proposée par défaut.
+- **Export groupé** depuis l'historique : ZIP des PDF et tableau récapitulatif ouvrable dans Excel.
+- **Téléchargement d'une sauvegarde** complète en un clic (Réglages > Sauvegarde et mises à jour).
+- **Mise à jour en un clic** depuis les versions publiées sur GitHub :
+  - empreinte SHA-256 vérifiée et contenu de l'archive contrôlé ;
+  - sauvegarde automatique juste avant ;
+  - `config/.env` et `storage/` ne sont jamais touchés.
+
+### Modifié
+
+- L'administrateur ne choisit plus le mot de passe des autres comptes : il les invite, ou leur envoie un lien de réinitialisation.
+- Le menu est réorganisé : « Personnalisation » et la nouvelle page système sont regroupées dans « Réglages », et « Mon compte » remplace l'affichage de l'email.
+- Mode `MAIL_DRIVER=log` pour le développement : les emails sont écrits dans `storage/logs/mail.log` au lieu d'être envoyés.
+
+### Mise à jour depuis la 1.0.x
+
+Envoyez les fichiers par FTP, comme d'habitude : la base se met à jour toute seule. Le menu Réglages proposera ensuite les mises à jour suivantes en un clic. **À la prochaine connexion, chaque administrateur configure sa double authentification** : gardez votre téléphone à portée de main.
+
 ## [1.0.2] — 2026-11-15
 
 ### Corrigé
